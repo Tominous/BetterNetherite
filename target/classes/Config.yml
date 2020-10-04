@@ -1,0 +1,37 @@
+# The prefix of the plugin in Chat
+Prefix: '&6Better &cNetherite &7» '
+
+# true - Disable the dumb vanilla way of crafting netherite items
+# false - Enable the dumb vanmilla way of crafting netherite items
+# This disables the 'upgrading' of diamond items to netherite using the smithing table
+# Instead, it makes it to where they must craft the items in the traditional way;
+# eg how you'd craft a diamond item, but with netherite ingots
+EnableNetheriteCrafting: true
+
+# To better balance it, and make getting netherite scrap easier and better, to make up for the new difficulty if the above is true
+AncientDebris:
+  # Should ancient debris give more scrap upon smelting it?
+  BetterSmelting:
+    # true - The plugins smelting with the custom things defined below
+    # false - Vanilla smelting, without the things below
+    Enabled: true
+    # If so, how much should it give?
+    Amount: 4
+    BlastFurnace:
+      # How much EXP should be earned from smelting via a blast furnace?
+      EXP: 3
+      # How long should it take to smelt via a blast furnace? (IN TICKS)
+      Time: 150
+    Furnace:
+      # How much EXP should be earned from smelting via a furnace?
+      EXP: 3
+      # How long should it take to smelt via a furnace? (IN TICKS)
+      Time: 200
+
+  # Should ancient debris have a chance of dropping extra scrap upon being mined?
+  ScrapDrop:
+    Enabled: true
+    # If so, whats the max amount it can drop?
+    Maximum: 4
+    # If so, what chance?
+    Chance: 70
