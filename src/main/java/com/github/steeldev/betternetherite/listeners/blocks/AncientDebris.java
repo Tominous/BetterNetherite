@@ -30,6 +30,7 @@ public class AncientDebris  implements Listener {
         int maxNumber = main.config.getInt("AncientDebris.ScrapDrop.Maximum");
         int randAmount = main.rand.nextInt(maxNumber);
         int amount = (randAmount == 0) ? 1 : randAmount;
+        if(amount > 64) amount = 64;
 
         netheriteScrap.setAmount(amount);
         if (main.chanceOf(chance)) {

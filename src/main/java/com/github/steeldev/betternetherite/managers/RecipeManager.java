@@ -14,7 +14,7 @@ public class RecipeManager {
     final static BetterNetherite main = BetterNetherite.getInstance();
 
     public static void RegisterRecipes(){
-        if (main.config.getBoolean("EnableNetheriteCrafting"))
+        if (main.config.getBoolean("EnableNetheriteCrafting") && !main.config.getBoolean("ImprovedUpgrading"))
             registerNetheriteItems();
         if (main.config.getBoolean("AncientDebris.BetterSmelting.Enabled"))
             registerBetterNetheriteScrapSmelting();
@@ -125,6 +125,8 @@ public class RecipeManager {
         removeRecipe("minecraft:netherite_scrap");
         removeRecipe("minecraft:netherite_scrap_from_blasting");
         int amount = main.config.getInt("AncientDebris.BetterSmelting.Amount");
+        if(amount > 64) amount = 64;
+        if(amount < 1) amount = 1;
 
         int blastEXP = main.config.getInt("AncientDebris.BetterSmelting.BlastFurnace.EXP");
         int blastTime = main.config.getInt("AncientDebris.BetterSmelting.BlastFurnace.Time");

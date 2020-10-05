@@ -8,6 +8,10 @@ Prefix: '&6Better &cNetherite &7» '
 # eg how you'd craft a diamond item, but with netherite ingots
 EnableNetheriteCrafting: true
 
+# Wanna keep the upgrade system but don't like how it works?
+# This will make upgrading require more Netherite ingots
+ImprovedUpgrading: false
+
 # To better balance it, and make getting netherite scrap easier and better, to make up for the new difficulty if the above is true
 AncientDebris:
   # Should ancient debris give more scrap upon smelting it?
