@@ -47,7 +47,7 @@ public class AncientDebris  implements Listener {
         //So we dont put metedata on EVERY placed block.
         //This is so people cant farm the extra scrap drops by placing and
         //mining debris over and now, aka abuse the system
-        //this value will of course wont persist through a server restart
+        //this value of course wont persist through a server restart
         //but the players dont have control over restarts
         if(e.isCancelled() ||
                 !block.getType().equals(Material.ANCIENT_DEBRIS))
