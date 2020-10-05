@@ -14,7 +14,8 @@ public class RecipeManager {
     final static BetterNetherite main = BetterNetherite.getInstance();
 
     public static void RegisterRecipes(){
-        if (main.config.getBoolean("EnableNetheriteCrafting") && !main.config.getBoolean("ImprovedUpgrading"))
+        if (main.config.getBoolean("EnableNetheriteCrafting") &&
+                !main.config.getBoolean("ImprovedUpgrading"))
             registerNetheriteItems();
         if (main.config.getBoolean("AncientDebris.BetterSmelting.Enabled"))
             registerBetterNetheriteScrapSmelting();

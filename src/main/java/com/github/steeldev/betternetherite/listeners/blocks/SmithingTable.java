@@ -3,11 +3,14 @@ package com.github.steeldev.betternetherite.listeners.blocks;
 import com.github.steeldev.betternetherite.BetterNetherite;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class SmithingTable implements Listener {
     BetterNetherite main = BetterNetherite.getInstance();
@@ -21,7 +24,54 @@ public class SmithingTable implements Listener {
         Player p = e.getPlayer();
         if (b.getType().equals(Material.SMITHING_TABLE)) {
             e.setCancelled(true);
-            p.sendMessage(main.colorize("&cNo.. this method of making Netherite stuff is dumb. Craft it instead :)"));
+            p.sendMessage(main.colorize(main.config.getString("Prefix") + main.config.getString("NetheriteUpgradingDisabledMsg")));
+        }
+    }
+
+    @EventHandler
+    public void smithingTableClick(InventoryClickEvent e){
+        if (!main.config.getBoolean("ImprovedUpgrading")) return;
+
+        Player p = (Player) e.getWhoClicked();
+        if (p.getOpenInventory().getTitle().contains(main.colorize("Upgrade Gear"))) {
+            ItemStack slot0Item = p.getOpenInventory().getItem(0);
+            ItemStack slot1Item = p.getOpenInventory().getItem(1);
+            ItemStack slot2Item = p.getOpenInventory().getItem(2);
+            ConfigurationSection upgradeRecipes = main.config.getConfigurationSection("UpgradeRecipes");
+
+            if(e.getSlot() != 2)
+                return;
+            if(slot0Item.getType() == Material.AIR)
+                return;
+            if(slot2Item.getType() == Material.AIR)
+                return;
+            if(slot1Item.getType() != Material.NETHERITE_INGOT)
+                return;
+            if(upgradeRecipes == null)
+                return;
+            if(!upgradeRecipes.getKeys(false).contains(String.valueOf(slot0Item.getType())))
+                return;
+
+            int ingotAmount = upgradeRecipes.getInt(String.valueOf(slot0Item.getType()));
+
+            String[] itemSplit = slot0Item.getType().toString().toLowerCase().split("_");
+            StringBuilder finalIt = new StringBuilder();
+            for (int i = 0; i < itemSplit.length; i++) {
+                finalIt.append(itemSplit[i].substring(0,1).toUpperCase()+itemSplit[i].substring(1));
+                if(i < itemSplit.length-1)
+                    finalIt.append(" ");
+            }
+            String notEnoughIngotsMsg = main.config.getString("NotEnoughIngotsMsg").replaceAll("AMOUNT", String.valueOf(ingotAmount)).replaceAll("ITEM", finalIt.toString());
+            String upgradeSuccessMsg = main.config.getString("UpgradeSuccessMsg").replaceAll("AMOUNT", String.valueOf(ingotAmount)).replaceAll("ITEM", finalIt.toString());
+
+            if(slot1Item.getAmount() < ingotAmount){
+                e.setCancelled(true);
+                p.sendMessage(main.colorize(main.config.getString("Prefix") + notEnoughIngotsMsg));
+            }
+            else{
+                slot1Item.setAmount(slot1Item.getAmount() - (ingotAmount-1));
+                p.sendMessage(main.colorize(main.config.getString("Prefix") + upgradeSuccessMsg));
+            }
         }
     }
 }

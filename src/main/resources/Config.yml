@@ -1,16 +1,36 @@
 # The prefix of the plugin in Chat
-Prefix: '&6Better &cNetherite &7» '
+Prefix: '&6Better &8Netherite &7» '
 
 # true - Disable the dumb vanilla way of crafting netherite items
 # false - Enable the dumb vanmilla way of crafting netherite items
 # This disables the 'upgrading' of diamond items to netherite using the smithing table
 # Instead, it makes it to where they must craft the items in the traditional way;
 # eg how you'd craft a diamond item, but with netherite ingots
-EnableNetheriteCrafting: true
+EnableNetheriteCrafting: false
+NetheriteUpgradingDisabledMsg: '&cSmithing Table upgrading for Netherite is disabled.'
 
 # Wanna keep the upgrade system but don't like how it works?
-# This will make upgrading require more Netherite ingots
-ImprovedUpgrading: false
+# This will make the upgrade system better and improve it
+# And make it more customizable
+ImprovedUpgrading: true
+
+# Valid placeholders:
+# AMOUNT - The amount of ingots
+# ITEM - Upgraded item
+NotEnoughIngotsMsg: '&cYou do not have enough &8Netherite Ingots&c in the second slot to upgrade your &6ITEM&c. You need &6AMOUNT&c!'
+UpgradeSuccessMsg: '&aYou have successfully upgraded your &6ITEM &ato &8Netherite&a for &6AMOUNT &8Netherite Ingots&a!'
+
+UpgradeRecipes:
+  # Define how many Netherite Ingots are required to upgrade each diamond item
+  DIAMOND_SWORD: 2
+  DIAMOND_AXE: 2
+  DIAMOND_SHOVEL: 1
+  DIAMOND_HOE: 2
+  DIAMOND_PICKAXE: 2
+  DIAMOND_HELMET: 3
+  DIAMOND_CHESTPLATE: 4
+  DIAMOND_LEGGINGS: 3
+  DIAMOND_BOOTS: 2
 
 # To better balance it, and make getting netherite scrap easier and better, to make up for the new difficulty if the above is true
 AncientDebris:
@@ -31,7 +51,6 @@ AncientDebris:
       EXP: 3
       # How long should it take to smelt via a furnace? (IN TICKS)
       Time: 200
-
   # Should ancient debris have a chance of dropping extra scrap upon being mined?
   ScrapDrop:
     Enabled: true
