@@ -1,5 +1,6 @@
 # Better Netherite
-A plugin that replaces vanilla methods of obtaining, smelting and crafting netherite items with a method that provides more difficulty.
+A plugin that brings a few changes to 1.16s new Netherite.
+Instead of the seemingly lazy way they made it, the upgrade system with the Smithing Table, you now have the option to disable that, and replace it with a crafting system that matches all other resources. And more features to improve it.
  
 Spigot link: https://www.spigotmc.org/resources/better-netherite.84526/
 
