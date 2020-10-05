@@ -45,6 +45,10 @@ public class AncientDebris  implements Listener {
         Block block = e.getBlock();
         //We only want to add this metadata value if the placed block is ancient debris
         //So we dont put metedata on EVERY placed block.
+        //This is so people cant farm the extra scrap drops by placing and
+        //mining debris over and now, aka abuse the system
+        //this value will of course wont persist through a server restart
+        //but the players dont have control over restarts
         if(e.isCancelled() ||
                 !block.getType().equals(Material.ANCIENT_DEBRIS))
             return;

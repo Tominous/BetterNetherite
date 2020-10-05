@@ -30,6 +30,7 @@ public class SmithingTable implements Listener {
 
     @EventHandler
     public void smithingTableClick(InventoryClickEvent e){
+        //definitely in need of improvements, i cant be fucked right now, so, deal with it :p
         if (!main.config.getBoolean("ImprovedUpgrading")) return;
 
         Player p = (Player) e.getWhoClicked();
@@ -40,6 +41,9 @@ public class SmithingTable implements Listener {
             ConfigurationSection upgradeRecipes = main.config.getConfigurationSection("UpgradeRecipes");
 
             if(e.getSlot() != 2 ||
+                    slot0Item == null ||
+                    slot1Item == null ||
+                    slot2Item == null ||
                     slot0Item.getType() == Material.AIR ||
                     slot2Item.getType() == Material.AIR ||
                     slot1Item.getType() != Material.NETHERITE_INGOT ||

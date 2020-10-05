@@ -1,5 +1,5 @@
 # The prefix of the plugin in Chat
-Prefix: '&6Better &8Netherite &7» '
+Prefix: '&6Better <#5C040F>Netherite &7» '
 
 # true - Disable the dumb vanilla way of crafting netherite items
 # false - Enable the dumb vanmilla way of crafting netherite items
