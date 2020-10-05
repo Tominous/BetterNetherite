@@ -39,17 +39,12 @@ public class SmithingTable implements Listener {
             ItemStack slot2Item = p.getOpenInventory().getItem(2);
             ConfigurationSection upgradeRecipes = main.config.getConfigurationSection("UpgradeRecipes");
 
-            if(e.getSlot() != 2)
-                return;
-            if(slot0Item.getType() == Material.AIR)
-                return;
-            if(slot2Item.getType() == Material.AIR)
-                return;
-            if(slot1Item.getType() != Material.NETHERITE_INGOT)
-                return;
-            if(upgradeRecipes == null)
-                return;
-            if(!upgradeRecipes.getKeys(false).contains(String.valueOf(slot0Item.getType())))
+            if(e.getSlot() != 2 ||
+                    slot0Item.getType() == Material.AIR ||
+                    slot2Item.getType() == Material.AIR ||
+                    slot1Item.getType() != Material.NETHERITE_INGOT ||
+                    upgradeRecipes == null ||
+                    !upgradeRecipes.getKeys(false).contains(String.valueOf(slot0Item.getType())))
                 return;
 
             int ingotAmount = upgradeRecipes.getInt(String.valueOf(slot0Item.getType()));
