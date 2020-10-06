@@ -1,5 +1,5 @@
 name: BetterNetherite
-version: '1.0.0'
+version: '${project.version}'
 api-version: '1.16'
 main: com.github.steeldev.betternetherite.BetterNetherite
 description: A plugin that changes how Netherite items are made. Providing more challenge to the matter.
