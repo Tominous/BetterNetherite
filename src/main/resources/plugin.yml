@@ -2,12 +2,12 @@ name: BetterNetherite
 version: '${project.version}'
 api-version: '1.16'
 main: com.github.steeldev.betternetherite.BetterNetherite
-description: A plugin that changes how Netherite items are made. Providing more challenge to the matter.
+description: A plugin that brings a few changes to 1.16s new Netherite.
 author: Steel_Dev
 commands:
   betternetheritereload:
     description: Reload the configuration.
-    aliases: bdreload
+    aliases: bnreload
     permission: betternetherite.admin
     permission-message: You dont have permission to use this command.
 permissions:

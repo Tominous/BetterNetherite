@@ -1,0 +1,82 @@
+package com.github.steeldev.betternetherite.config;
+
+import com.github.steeldev.betternetherite.BetterNetherite;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+public class Lang {
+    public static String PREFIX;
+    public static String NETHERITE_UPGRADING_DISABLE_MSG;
+    public static String NOT_ENOUGH_INGOTS_MSG;
+    public static String UPGRADE_SUCCESS_MSG;
+    public static String RELOAD_MSG;
+    public static String RECIPE_REMOVED_MSG;
+    public static String RECIPE_ADDED_MSG;
+    public static String ENABLED_MSG;
+    public static String DISABLED_MSG;
+
+    private final BetterNetherite plugin;
+    private FileConfiguration lang;
+    private File langFile;
+
+    public Lang(BetterNetherite plugin) {
+        this.plugin = plugin;
+        loadLangFile();
+    }
+
+    private void loadLangFile() {
+        if (langFile == null) {
+            langFile = new File(plugin.getDataFolder(), "Messages.yml");
+        }
+        if (!langFile.exists()) {
+            plugin.saveResource("Messages.yml", false);
+        }
+        lang = YamlConfiguration.loadConfiguration(langFile);
+        matchLangFile();
+        loadLang();
+    }
+
+    // Used to update lang
+    @SuppressWarnings("ConstantConditions")
+    private void matchLangFile() {
+        try {
+            boolean hasUpdated = false;
+            InputStream stream = plugin.getResource(langFile.getName());
+            assert stream != null;
+            InputStreamReader is = new InputStreamReader(stream);
+            YamlConfiguration defLand = YamlConfiguration.loadConfiguration(is);
+            for (String key : defLand.getConfigurationSection("").getKeys(true)) {
+                if (!lang.contains(key)) {
+                    lang.set(key, defLand.get(key));
+                    hasUpdated = true;
+                }
+            }
+            for (String key : lang.getConfigurationSection("").getKeys(true)) {
+                if (!defLand.contains(key)) {
+                    lang.set(key, null);
+                    hasUpdated = true;
+                }
+            }
+            if (hasUpdated)
+                lang.save(langFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadLang() {
+        PREFIX = lang.getString("Prefix");
+        NETHERITE_UPGRADING_DISABLE_MSG = lang.getString("NetheriteUpgradingDisabledMsg");
+        NOT_ENOUGH_INGOTS_MSG = lang.getString("NotEnoughIngotsMsg");
+        UPGRADE_SUCCESS_MSG = lang.getString("UpgradeSuccessMsg");
+        RELOAD_MSG = lang.getString("ReloadMsg");
+        RECIPE_REMOVED_MSG = lang.getString("RecipeRemovedMsg");
+        RECIPE_ADDED_MSG = lang.getString("RecipeAddedMsg");
+        ENABLED_MSG = lang.getString("EnabledMsg");
+        DISABLED_MSG = lang.getString("DisabledMsg");
+    }
+}

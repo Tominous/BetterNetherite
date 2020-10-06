@@ -1,5 +1,5 @@
-# The prefix of the plugin in Chat
-Prefix: '&6Better <#5C040F>Netherite &7» '
+# Enable debug messages?
+Debug: true
 
 # true - Disable the dumb vanilla way of crafting netherite items
 # false - Enable the dumb vanmilla way of crafting netherite items
@@ -7,18 +7,11 @@ Prefix: '&6Better <#5C040F>Netherite &7» '
 # Instead, it makes it to where they must craft the items in the traditional way;
 # eg how you'd craft a diamond item, but with netherite ingots
 EnableNetheriteCrafting: false
-NetheriteUpgradingDisabledMsg: '&cSmithing Table upgrading for Netherite is disabled.'
 
 # Wanna keep the upgrade system but don't like how it works?
 # This will make the upgrade system better and improve it
 # And make it more customizable
 ImprovedUpgrading: true
-
-# Valid placeholders:
-# AMOUNT - The amount of ingots
-# ITEM - Upgraded item
-NotEnoughIngotsMsg: '&cYou do not have enough &8Netherite Ingots&c in the second slot to upgrade your &6ITEM&c. You need &6AMOUNT&c!'
-UpgradeSuccessMsg: '&aYou have successfully upgraded your &6ITEM &ato &8Netherite&a for &6AMOUNT &8Netherite Ingots&a!'
 
 UpgradeRecipes:
   # Define how many Netherite Ingots are required to upgrade each diamond item
@@ -58,3 +51,8 @@ AncientDebris:
     Maximum: 4
     # If so, what chance?
     Chance: 70
+  # Should ancient debris have a chance of dropping a full ingot?
+  IngotDrop:
+    Enabled: true
+    # If so, what chance?
+    Chance: 5

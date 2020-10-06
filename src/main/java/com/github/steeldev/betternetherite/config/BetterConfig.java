@@ -13,17 +13,10 @@ import java.util.Map;
 
 public class BetterConfig {
 
-    private final BetterNetherite plugin;
-    private FileConfiguration config;
-    private File configFile;
-
     // Config stuff
-    public static String PREFIX;
+    public static boolean DEBUG;
     public static boolean ENABLE_NETHERITE_CRAFTING;
-    public static String NETHERITE_UPGRADING_DISABLE_MSG;
     public static boolean IMPROVED_UPGRADING;
-    public static String NOT_ENOUGH_INGOTS_MSG;
-    public static String UPGRADE_SUCCESS_MSG;
     // Upgrade Recipes
     public static Map<String, Integer> UPGRADE_RECIPES;
     // Ancient Debris Better Smelting
@@ -33,9 +26,16 @@ public class BetterConfig {
     public static int ANCIENT_DEBRIS_BETTER_SMELTING_BLAST_FURNACE_TIME;
     public static int ANCIENT_DEBRIS_BETTER_SMELTING_FURNACE_EXP;
     public static int ANCIENT_DEBRIS_BETTER_SMELTING_FURNACE_TIME;
-    public static boolean ANCIENT_DEBRIS_BETTER_SCRAP_DROP_ENABLED;
-    public static int ANCIENT_DEBRIS_BETTER_SCRAP_DROP_MAX;
-    public static int ANCIENT_DEBRIS_BETTER_SCRAP_DROP_CHANCE;
+    // Ancient Debris Scrap Drop
+    public static boolean ANCIENT_DEBRIS_SCRAP_DROP_ENABLED;
+    public static int ANCIENT_DEBRIS_SCRAP_DROP_MAX;
+    public static int ANCIENT_DEBRIS_SCRAP_DROP_CHANCE;
+    // Ancient Debris Ingot Drop
+    public static boolean ANCIENT_DEBRIS_INGOT_DROP_ENABLED;
+    public static int ANCIENT_DEBRIS_INGOT_DROP_CHANCE;
+    private final BetterNetherite plugin;
+    private FileConfiguration config;
+    private File configFile;
 
     public BetterConfig(BetterNetherite plugin) {
         this.plugin = plugin;
@@ -83,23 +83,20 @@ public class BetterConfig {
     }
 
     private void loadConfigs() {
-        PREFIX = config.getString("Prefix");
+        DEBUG = config.getBoolean("Debug");
         ENABLE_NETHERITE_CRAFTING = config.getBoolean("EnableNetheriteCrafting");
-        NETHERITE_UPGRADING_DISABLE_MSG = config.getString("NetheriteUpgradingDisabledMsg");
         IMPROVED_UPGRADING = config.getBoolean("ImprovedUpgrading");
-        NOT_ENOUGH_INGOTS_MSG = config.getString("NotEnoughIngotsMsg");
-        UPGRADE_SUCCESS_MSG = config.getString("UpgradeSuccessMsg");
-
         ANCIENT_DEBRIS_BETTER_SMELTING_ENABLED = config.getBoolean("AncientDebris.BetterSmelting.Enabled");
         ANCIENT_DEBRIS_BETTER_SMELTING_AMOUNT = config.getInt("AncientDebris.BetterSmelting.Amount");
         ANCIENT_DEBRIS_BETTER_SMELTING_BLAST_FURNACE_EXP = config.getInt("AncientDebris.BetterSmelting.BlastFurnace.EXP");
         ANCIENT_DEBRIS_BETTER_SMELTING_BLAST_FURNACE_TIME = config.getInt("AncientDebris.BetterSmelting.BlastFurnace.Time");
         ANCIENT_DEBRIS_BETTER_SMELTING_FURNACE_EXP = config.getInt("AncientDebris.BetterSmelting.Furnace.EXP");
         ANCIENT_DEBRIS_BETTER_SMELTING_FURNACE_TIME = config.getInt("AncientDebris.BetterSmelting.Furnace.Time");
-        ANCIENT_DEBRIS_BETTER_SCRAP_DROP_ENABLED = config.getBoolean("AncientDebris.ScrapDrop.Enabled");
-        ANCIENT_DEBRIS_BETTER_SCRAP_DROP_MAX = config.getInt("AncientDebris.ScrapDrop.Maximum");
-        ANCIENT_DEBRIS_BETTER_SCRAP_DROP_CHANCE = config.getInt("AncientDebris.ScrapDrop.Chance");
-
+        ANCIENT_DEBRIS_SCRAP_DROP_ENABLED = config.getBoolean("AncientDebris.ScrapDrop.Enabled");
+        ANCIENT_DEBRIS_SCRAP_DROP_MAX = config.getInt("AncientDebris.ScrapDrop.Maximum");
+        ANCIENT_DEBRIS_SCRAP_DROP_CHANCE = config.getInt("AncientDebris.ScrapDrop.Chance");
+        ANCIENT_DEBRIS_INGOT_DROP_ENABLED = config.getBoolean("AncientDebris.IngotDrop.Enabled");
+        ANCIENT_DEBRIS_INGOT_DROP_CHANCE = config.getInt("AncientDebris.IngotDrop.Chance");
         UPGRADE_RECIPES = new HashMap<>();
         ConfigurationSection section = config.getConfigurationSection("UpgradeRecipes");
         if (section == null) return;
@@ -107,5 +104,4 @@ public class BetterConfig {
             UPGRADE_RECIPES.put(key, section.getInt(key));
         }
     }
-
 }

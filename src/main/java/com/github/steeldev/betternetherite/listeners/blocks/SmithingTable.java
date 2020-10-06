@@ -2,6 +2,7 @@ package com.github.steeldev.betternetherite.listeners.blocks;
 
 import com.github.steeldev.betternetherite.BetterNetherite;
 import com.github.steeldev.betternetherite.config.BetterConfig;
+import com.github.steeldev.betternetherite.config.Lang;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -26,12 +27,12 @@ public class SmithingTable implements Listener {
         Player p = e.getPlayer();
         if (b.getType().equals(Material.SMITHING_TABLE)) {
             e.setCancelled(true);
-            p.sendMessage(main.colorize(BetterConfig.PREFIX + BetterConfig.NETHERITE_UPGRADING_DISABLE_MSG));
+            p.sendMessage(main.colorize(String.format("%s%s", Lang.PREFIX, Lang.NETHERITE_UPGRADING_DISABLE_MSG)));
         }
     }
 
     @EventHandler
-    public void smithingTableClick(InventoryClickEvent e){
+    public void smithingTableClick(InventoryClickEvent e) {
         //definitely in need of improvements, i cant be fucked right now, so, deal with it :p
         if (!BetterConfig.IMPROVED_UPGRADING) return;
 
@@ -42,7 +43,7 @@ public class SmithingTable implements Listener {
             ItemStack slot2Item = p.getOpenInventory().getItem(2);
             Map<String, Integer> upgradeRecipes = BetterConfig.UPGRADE_RECIPES;
 
-            if(e.getSlot() != 2 ||
+            if (e.getSlot() != 2 ||
                     slot0Item == null ||
                     slot1Item == null ||
                     slot2Item == null ||
@@ -58,20 +59,19 @@ public class SmithingTable implements Listener {
             String[] itemSplit = slot0Item.getType().toString().toLowerCase().split("_");
             StringBuilder finalIt = new StringBuilder();
             for (int i = 0; i < itemSplit.length; i++) {
-                finalIt.append(itemSplit[i].substring(0,1).toUpperCase()+itemSplit[i].substring(1));
-                if(i < itemSplit.length-1)
+                finalIt.append(itemSplit[i].substring(0, 1).toUpperCase() + itemSplit[i].substring(1));
+                if (i < itemSplit.length - 1)
                     finalIt.append(" ");
             }
-            String notEnoughIngotsMsg = BetterConfig.NOT_ENOUGH_INGOTS_MSG.replaceAll("AMOUNT", String.valueOf(ingotAmount)).replaceAll("ITEM", finalIt.toString());
-            String upgradeSuccessMsg = BetterConfig.UPGRADE_SUCCESS_MSG.replaceAll("AMOUNT", String.valueOf(ingotAmount)).replaceAll("ITEM", finalIt.toString());
+            String notEnoughIngotsMsg = Lang.NOT_ENOUGH_INGOTS_MSG.replaceAll("AMOUNT", String.valueOf(ingotAmount)).replaceAll("ITEM", finalIt.toString());
+            String upgradeSuccessMsg = Lang.UPGRADE_SUCCESS_MSG.replaceAll("AMOUNT", String.valueOf(ingotAmount)).replaceAll("ITEM", finalIt.toString());
 
-            if(slot1Item.getAmount() < ingotAmount){
+            if (slot1Item.getAmount() < ingotAmount) {
                 e.setCancelled(true);
-                p.sendMessage(main.colorize(BetterConfig.PREFIX + notEnoughIngotsMsg));
-            }
-            else{
-                slot1Item.setAmount(slot1Item.getAmount() - (ingotAmount-1));
-                p.sendMessage(main.colorize(BetterConfig.PREFIX + upgradeSuccessMsg));
+                p.sendMessage(main.colorize(String.format("%s%s", Lang.PREFIX, notEnoughIngotsMsg)));
+            } else {
+                slot1Item.setAmount(slot1Item.getAmount() - (ingotAmount - 1));
+                p.sendMessage(main.colorize(String.format("%s%s", Lang.PREFIX, upgradeSuccessMsg)));
             }
         }
     }
