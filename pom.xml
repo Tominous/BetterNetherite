@@ -9,6 +9,19 @@
     <version>1.0.0</version>
 
     <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <finalName>${project.name}-${project.version}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <targetPath>.</targetPath>
+                <includes>
+                    <include>plugin.yml</include>
+                    <include>Config.yml</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
