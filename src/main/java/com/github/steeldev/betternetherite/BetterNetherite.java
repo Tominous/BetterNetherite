@@ -1,6 +1,7 @@
 package com.github.steeldev.betternetherite;
 
 import com.github.steeldev.betternetherite.commands.admin.BetterNetheriteReload;
+import com.github.steeldev.betternetherite.config.BetterConfig;
 import com.github.steeldev.betternetherite.listeners.blocks.AncientDebris;
 import com.github.steeldev.betternetherite.listeners.blocks.SmithingTable;
 import com.github.steeldev.betternetherite.managers.RecipeManager;
@@ -19,7 +20,7 @@ public class BetterNetherite extends JavaPlugin {
 
     private static final Pattern HEX_PATTERN = Pattern.compile("<#([A-Fa-f0-9]){6}>");
 
-    public FileConfiguration config = null;
+    public BetterConfig config = null;
     public Random rand = new Random();
     String configPath = getDataFolder() + "/Config.yml";
     public final File configFile = new File(configPath);
@@ -46,9 +47,7 @@ public class BetterNetherite extends JavaPlugin {
     }
 
     public void loadCustomConfigs() {
-        if (!configFile.exists())
-            saveResource("Config.yml", false);
-        config = YamlConfiguration.loadConfiguration(configFile);
+        this.config = new BetterConfig(this);
     }
 
     public void registerCommands() {

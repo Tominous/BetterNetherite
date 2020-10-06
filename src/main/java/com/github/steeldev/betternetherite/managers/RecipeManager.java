@@ -1,6 +1,7 @@
 package com.github.steeldev.betternetherite.managers;
 
 import com.github.steeldev.betternetherite.BetterNetherite;
+import com.github.steeldev.betternetherite.config.BetterConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
@@ -14,10 +15,10 @@ public class RecipeManager {
     final static BetterNetherite main = BetterNetherite.getInstance();
 
     public static void RegisterRecipes(){
-        if (main.config.getBoolean("EnableNetheriteCrafting") &&
-                !main.config.getBoolean("ImprovedUpgrading"))
+        if (BetterConfig.ENABLE_NETHERITE_CRAFTING &&
+                !BetterConfig.IMPROVED_UPGRADING)
             registerNetheriteItems();
-        if (main.config.getBoolean("AncientDebris.BetterSmelting.Enabled"))
+        if (BetterConfig.ANCIENT_DEBRIS_BETTER_SMELTING_ENABLED)
             registerBetterNetheriteScrapSmelting();
     }
 
@@ -125,15 +126,15 @@ public class RecipeManager {
         //
         removeRecipe("minecraft:netherite_scrap");
         removeRecipe("minecraft:netherite_scrap_from_blasting");
-        int amount = main.config.getInt("AncientDebris.BetterSmelting.Amount");
+        int amount = BetterConfig.ANCIENT_DEBRIS_BETTER_SMELTING_AMOUNT;
         if(amount > 64) amount = 64;
         if(amount < 1) amount = 1;
 
-        int blastEXP = main.config.getInt("AncientDebris.BetterSmelting.BlastFurnace.EXP");
-        int blastTime = main.config.getInt("AncientDebris.BetterSmelting.BlastFurnace.Time");
+        int blastEXP = BetterConfig.ANCIENT_DEBRIS_BETTER_SMELTING_BLAST_FURNACE_EXP;
+        int blastTime = BetterConfig.ANCIENT_DEBRIS_BETTER_SMELTING_BLAST_FURNACE_TIME;
 
-        int normEXP = main.config.getInt("AncientDebris.BetterSmelting.Furnace.EXP");
-        int normTime = main.config.getInt("AncientDebris.BetterSmelting.Furnace.Time");
+        int normEXP = BetterConfig.ANCIENT_DEBRIS_BETTER_SMELTING_FURNACE_EXP;
+        int normTime = BetterConfig.ANCIENT_DEBRIS_BETTER_SMELTING_FURNACE_TIME;
 
         ItemStack netheriteScrap = new ItemStack(Material.NETHERITE_SCRAP, amount);
 
