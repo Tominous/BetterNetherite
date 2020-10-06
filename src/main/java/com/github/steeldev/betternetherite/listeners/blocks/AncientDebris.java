@@ -1,6 +1,7 @@
 package com.github.steeldev.betternetherite.listeners.blocks;
 
 import com.github.steeldev.betternetherite.BetterNetherite;
+import com.github.steeldev.betternetherite.config.BetterConfig;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -18,16 +19,16 @@ public class AncientDebris  implements Listener {
     @EventHandler
     public void onBreak(BlockBreakEvent e){
         Block block = e.getBlock();
-        if(e.isCancelled() ||
+        if (e.isCancelled() ||
                 !block.getType().equals(Material.ANCIENT_DEBRIS) ||
-                !main.config.getBoolean("AncientDebris.ScrapDrop.Enabled") ||
+                !BetterConfig.ANCIENT_DEBRIS_BETTER_SCRAP_DROP_ENABLED ||
                 block.hasMetadata("PlacedByPlayer"))
             return;
         ItemStack netheriteScrap = new ItemStack(Material.NETHERITE_SCRAP);
 
-        int chance = main.config.getInt("AncientDebris.ScrapDrop.Chance");
+        int chance = BetterConfig.ANCIENT_DEBRIS_BETTER_SCRAP_DROP_CHANCE;
 
-        int maxNumber = main.config.getInt("AncientDebris.ScrapDrop.Maximum");
+        int maxNumber = BetterConfig.ANCIENT_DEBRIS_BETTER_SCRAP_DROP_MAX;
         int randAmount = main.rand.nextInt(maxNumber);
         int amount = (randAmount == 0) ? 1 : randAmount;
         if(amount > 64) amount = 64;
