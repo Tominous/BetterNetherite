@@ -39,7 +39,7 @@ public class CrimsonShrine implements Listener {
             return;
         if (e.getHand() != EquipmentSlot.HAND)
             return;
-        if(e.isCancelled())
+        if (e.isCancelled())
             return;
         boolean correct = false;
         if (clickedBlock.getType().equals(Material.CRIMSON_STEM)) {
@@ -130,91 +130,77 @@ public class CrimsonShrine implements Listener {
                                                 chargeMat3,
                                                 chargeMat7,
                                                 chargeMat8));
-
-                                        if (chain1.getType().equals(Material.CHAIN) &&
-                                                chain2.getType().equals(Material.CHAIN) &&
-                                                chain3.getType().equals(Material.CHAIN) &&
-                                                chain4.getType().equals(Material.CHAIN) &&
-                                                chain5.getType().equals(Material.CHAIN) &&
-                                                chain6.getType().equals(Material.CHAIN) &&
-                                                chain7.getType().equals(Material.CHAIN) &&
-                                                chain8.getType().equals(Material.CHAIN)) {
-
-                                            correct = true;
-                                            int chargesLeft = 0;
-                                            for (Block charge : charges) {
-                                                if (charge.getType().equals(BetterConfig.CRIMSON_NETHERITE_SHRINE_CHARGE_MAT)) {
-                                                    chargesLeft++;
-                                                }
+                                        correct = true;
+                                        int chargesLeft = 0;
+                                        for (Block charge : charges) {
+                                            if (charge.getType().equals(BetterConfig.CRIMSON_NETHERITE_SHRINE_CHARGE_MAT)) {
+                                                chargesLeft++;
                                             }
-                                            if (chargesLeft > 0) {
-                                                if (!BetterConfig.USABLE_SHRINE_ITEMS.containsKey(item.getType().toString())) {
-                                                    p.sendMessage(main.colorize(Lang.PREFIX + Lang.SHRINE_INVALID_ITEM_MSG.replaceAll("SHRINE", BetterConfig.CRIMSON_NETHERITE_SHRINE_DISPLAY)));
+                                        }
+                                        if (chargesLeft > 0) {
+                                            if (!BetterConfig.USABLE_SHRINE_ITEMS.containsKey(item.getType().toString())) {
+                                                p.sendMessage(main.colorize(Lang.PREFIX + Lang.SHRINE_INVALID_ITEM_MSG.replaceAll("SHRINE", BetterConfig.CRIMSON_NETHERITE_SHRINE_DISPLAY)));
+                                                return;
+                                            }
+                                            NBTItem nbtItem = new NBTItem(item);
+                                            if (nbtItem.hasKey("netherite_reinforced")) {
+                                                if (nbtItem.getBoolean("netherite_reinforced")) {
+                                                    p.sendMessage(main.colorize(Lang.PREFIX + Lang.SHRINE_ITEM_ALREADY_EFFECTED_MSG.replaceAll("EFFECT", BetterConfig.CRIMSON_NETHERITE_SHRINE_EFFECT_DISPLAY)));
                                                     return;
                                                 }
-                                                NBTItem nbtItem = new NBTItem(item);
-                                                if (nbtItem.hasKey("netherite_reinforced")) {
-                                                    if (nbtItem.getBoolean("netherite_reinforced")) {
-                                                        p.sendMessage(main.colorize(Lang.PREFIX + Lang.SHRINE_ITEM_ALREADY_EFFECTED_MSG.replaceAll("EFFECT", BetterConfig.CRIMSON_NETHERITE_SHRINE_EFFECT_DISPLAY)));
-                                                        return;
-                                                    }
-                                                }
-                                                nbtItem.addCompound("netherite_reinforced");
-                                                nbtItem.setBoolean("netherite_reinforced", true);
-                                                item = nbtItem.getItem();
-                                                ItemMeta meta = (item.getItemMeta() == null) ? Bukkit.getItemFactory().getItemMeta(item.getType()) : item.getItemMeta();
-                                                List<String> curLore = (meta.getLore() == null) ? new ArrayList<>() : meta.getLore();
-                                                curLore.add(main.colorize("&b&lREINFORCED"));
-                                                meta.setLore(curLore);
-                                                item.setItemMeta(meta);
-                                                p.getInventory().setItemInMainHand(item);
-
-                                                chargesLeft--;
-                                                charges.get(chargesLeft).setType(Material.AIR);
-                                                p.getWorld().strikeLightning(clickedBlock.getLocation());
-                                                p.getWorld().spawnParticle(Particle.FLAME, charges.get(chargesLeft).getLocation(), 5);
-                                                p.getWorld().playSound(charges.get(chargesLeft).getLocation(), Sound.BLOCK_REDSTONE_TORCH_BURNOUT, 1.5f, 1.5f);
-                                                p.getWorld().playSound(clickedBlock.getLocation(), Sound.BLOCK_ANVIL_USE, 1.6f, 1.6f);
-                                                if (chargesLeft < 3) {
-                                                    String chargeMat = main.formalizedString(BetterConfig.CRIMSON_NETHERITE_SHRINE_CHARGE_MAT.toString());
-                                                    p.sendMessage(main.colorize(Lang.PREFIX + Lang.SHRINE_CHARGES_LOW_MSG.replaceAll("CHARGEMAT", chargeMat)));
-                                                } else {
-                                                    p.sendMessage(main.colorize(Lang.PREFIX + Lang.SHRINE_CHARGES_MSG.replaceAll("CHARGESAVAILABLE", String.valueOf(chargesLeft))));
-                                                }
-
-                                                if (chargesLeft < 1) {
-                                                    if (main.chanceOf(BetterConfig.CRIMSON_NETHERITE_SHRINE_EXPLODE_CHANCE)) {
-                                                        p.getWorld().playSound(clickedBlock.getLocation(), Sound.BLOCK_ANVIL_BREAK, 1.6f, 1.6f);
-                                                        p.getWorld().strikeLightning(clickedBlock.getLocation());
-                                                        Bukkit.getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
-                                                            @Override
-                                                            public void run() {
-                                                                p.getWorld().strikeLightning(clickedBlock.getLocation());
-                                                            }
-                                                        }, 10);
-                                                        Bukkit.getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
-                                                            @Override
-                                                            public void run() {
-                                                                p.getWorld().strikeLightning(clickedBlock.getLocation());
-                                                                p.getWorld().createExplosion(clickedBlock.getLocation(), 8, true);
-                                                            }
-                                                        }, 5);
-                                                    }
-                                                    else{
-                                                        p.getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, clickedBlock.getLocation(), 2);
-                                                        p.getWorld().playEffect(clickedBlock.getLocation(), Effect.ZOMBIE_DESTROY_DOOR, 2);
-                                                        clickedBlock.setType(Material.AIR);
-                                                    }
-                                                }
-                                                p.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, clickedBlock.getLocation(), 2);
-                                                p.sendMessage(main.colorize(Lang.PREFIX + Lang.SHRINE_USED_MSG.replaceAll("SHRINE", BetterConfig.CRIMSON_NETHERITE_SHRINE_DISPLAY).replaceAll("EFFECT", BetterConfig.CRIMSON_NETHERITE_SHRINE_EFFECT_DISPLAY)));
                                             }
-                                            else
-                                            {
+                                            nbtItem.addCompound("netherite_reinforced");
+                                            nbtItem.setBoolean("netherite_reinforced", true);
+                                            item = nbtItem.getItem();
+                                            ItemMeta meta = (item.getItemMeta() == null) ? Bukkit.getItemFactory().getItemMeta(item.getType()) : item.getItemMeta();
+                                            List<String> curLore = (meta.getLore() == null) ? new ArrayList<>() : meta.getLore();
+                                            curLore.add(main.colorize("&b&lREINFORCED"));
+                                            meta.setLore(curLore);
+                                            item.setItemMeta(meta);
+                                            p.getInventory().setItemInMainHand(item);
+
+                                            chargesLeft--;
+                                            charges.get(chargesLeft).setType(Material.AIR);
+                                            p.getWorld().strikeLightning(clickedBlock.getLocation());
+                                            p.getWorld().spawnParticle(Particle.FLAME, charges.get(chargesLeft).getLocation(), 5);
+                                            p.getWorld().playSound(charges.get(chargesLeft).getLocation(), Sound.BLOCK_REDSTONE_TORCH_BURNOUT, 1.5f, 1.5f);
+                                            p.getWorld().playSound(clickedBlock.getLocation(), Sound.BLOCK_ANVIL_USE, 1.6f, 1.6f);
+                                            if (chargesLeft < 3) {
                                                 String chargeMat = main.formalizedString(BetterConfig.CRIMSON_NETHERITE_SHRINE_CHARGE_MAT.toString());
-                                                p.getWorld().playSound(clickedBlock.getLocation(), Sound.BLOCK_BEACON_DEACTIVATE, 1.6f, 1.6f);
-                                                p.sendMessage(main.colorize(Lang.PREFIX + Lang.SHRINE_NO_CHARGES_MSG.replaceAll("SHRINE", BetterConfig.CRIMSON_NETHERITE_SHRINE_DISPLAY).replaceAll("CHARGEMAT", chargeMat)));
+                                                p.sendMessage(main.colorize(Lang.PREFIX + Lang.SHRINE_CHARGES_LOW_MSG.replaceAll("CHARGEMAT", chargeMat)));
+                                            } else {
+                                                p.sendMessage(main.colorize(Lang.PREFIX + Lang.SHRINE_CHARGES_MSG.replaceAll("CHARGESAVAILABLE", String.valueOf(chargesLeft))));
                                             }
+
+                                            if (chargesLeft < 1) {
+                                                if (main.chanceOf(BetterConfig.CRIMSON_NETHERITE_SHRINE_EXPLODE_CHANCE)) {
+                                                    p.getWorld().playSound(clickedBlock.getLocation(), Sound.BLOCK_ANVIL_BREAK, 1.6f, 1.6f);
+                                                    p.getWorld().strikeLightning(clickedBlock.getLocation());
+                                                    Bukkit.getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            p.getWorld().strikeLightning(clickedBlock.getLocation());
+                                                        }
+                                                    }, 10);
+                                                    Bukkit.getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            p.getWorld().strikeLightning(clickedBlock.getLocation());
+                                                            p.getWorld().createExplosion(clickedBlock.getLocation(), 8, true);
+                                                        }
+                                                    }, 5);
+                                                } else {
+                                                    p.getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, clickedBlock.getLocation(), 2);
+                                                    p.getWorld().playEffect(clickedBlock.getLocation(), Effect.ZOMBIE_DESTROY_DOOR, 2);
+                                                    clickedBlock.setType(Material.AIR);
+                                                }
+                                            }
+                                            p.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, clickedBlock.getLocation(), 2);
+                                            p.sendMessage(main.colorize(Lang.PREFIX + Lang.SHRINE_USED_MSG.replaceAll("SHRINE", BetterConfig.CRIMSON_NETHERITE_SHRINE_DISPLAY).replaceAll("EFFECT", BetterConfig.CRIMSON_NETHERITE_SHRINE_EFFECT_DISPLAY)));
+                                        } else {
+                                            String chargeMat = main.formalizedString(BetterConfig.CRIMSON_NETHERITE_SHRINE_CHARGE_MAT.toString());
+                                            p.getWorld().playSound(clickedBlock.getLocation(), Sound.BLOCK_BEACON_DEACTIVATE, 1.6f, 1.6f);
+                                            p.sendMessage(main.colorize(Lang.PREFIX + Lang.SHRINE_NO_CHARGES_MSG.replaceAll("SHRINE", BetterConfig.CRIMSON_NETHERITE_SHRINE_DISPLAY).replaceAll("CHARGEMAT", chargeMat)));
                                         }
                                     }
                                 }
@@ -222,9 +208,9 @@ public class CrimsonShrine implements Listener {
                         }
                     }
                 }
-                if(!correct){
-                    p.sendMessage(main.colorize(Lang.PREFIX + Lang.SHRINE_BUILT_INCORRECT_MSG.replaceAll("SHRINE", BetterConfig.CRIMSON_NETHERITE_SHRINE_DISPLAY)));
-                }
+            }
+            if (!correct) {
+                p.sendMessage(main.colorize(Lang.PREFIX + Lang.SHRINE_BUILT_INCORRECT_MSG.replaceAll("SHRINE", BetterConfig.CRIMSON_NETHERITE_SHRINE_DISPLAY)));
             }
         }
     }
