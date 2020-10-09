@@ -26,22 +26,18 @@ public class CrimsonShrine implements Listener {
     @EventHandler
     public void onCrimsonShrineClick(PlayerInteractEvent e) {
         // Could REALLY use improvements, but I feel like ass as I'm writing this, so deal with it.
-        if (!BetterConfig.CRIMSON_NETHERITE_SHRINE_ENABLED)
-            return;
         Player p = e.getPlayer();
         ItemStack item = p.getInventory().getItemInMainHand();
-        if (e.getAction() != Action.RIGHT_CLICK_BLOCK)
-            return;
         Block clickedBlock = e.getClickedBlock();
-        if (clickedBlock == null)
-            return;
-        if (item.getType() == Material.AIR)
-            return;
-        if (e.getHand() != EquipmentSlot.HAND)
-            return;
-        if (e.isCancelled())
-            return;
         boolean correct = false;
+        if (!BetterConfig.CRIMSON_NETHERITE_SHRINE_ENABLED ||
+                e.getAction() != Action.RIGHT_CLICK_BLOCK ||
+                clickedBlock == null ||
+                item.getType() == Material.AIR ||
+                e.getHand() != EquipmentSlot.HAND ||
+                e.isCancelled())
+            return;
+        
         if (clickedBlock.getType().equals(Material.CRIMSON_STEM)) {
             Block crimsonFence = clickedBlock.getRelative(0, -1, 0);
             if (crimsonFence.getType().equals(Material.CRIMSON_FENCE)) {
