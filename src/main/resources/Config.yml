@@ -1,20 +1,75 @@
+# For inputting Materials into a list, or anything else in here
+#  it must be how minecraft reads it, which is all caps and
+#  spaced with an underscore; EG: 'NETHERITE_INGOT'
+#  for a list of materials, head here and look under 'Enum Constants':
+#    https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html - Note: use ctrl+f to search, not the search bar
+
+# Traditional color codes supported for string values, and Hex.
+#  EG: &cHi! <#5C040F>Hey!
+
 # Enable debug messages?
 Debug: true
 
 # true - Disable the dumb vanilla way of crafting netherite items
 # false - Enable the dumb vanmilla way of crafting netherite items
 # This disables the 'upgrading' of diamond items to netherite using the smithing table
-# Instead, it makes it to where they must craft the items in the traditional way;
-# eg how you'd craft a diamond item, but with netherite ingots
-EnableNetheriteCrafting: false
+#   Instead, it makes it to where they must craft the items in the traditional way;
+#   eg how you'd craft a diamond item, but with netherite ingots
+NetheriteCrafting: false
 
 # Wanna keep the upgrade system but don't like how it works?
-# This will make the upgrade system better and improve it
-# And make it more customizable
+#   This will make the upgrade system better and improve it
+#   And make it more customizable
 ImprovedUpgrading: true
+
+NetheriteShrines:
+  # Item types that can be used on the Shrines.
+  # Note: MUST be in all caps like below, and it must be a valid Material.
+  UsableItems:
+    - NETHERITE_SWORD
+    - NETHERITE_AXE
+    - NETHERITE_SHOVEL
+    - NETHERITE_PICKAXE
+    - NETHERITE_HOE
+    - NETHERITE_HELMET
+    - NETHERITE_CHESTPLATE
+    - NETHERITE_LEGGINGS
+    - NETHERITE_BOOTS
+  # Should the 'Netherite Shrines' be enabled?
+  #  Shrines have a specific way they must be built.
+  #  Shrines have 8 charges, you must recharge them using
+  #  The defined block on the chains.
+  #  If it runs out of Charges, the Shrine will explode.
+  CrimsonShrine:
+    # Should the Crimson Netherite Shrine be enabled?
+    #  This shrine will reinforce netherite items.
+    Enabled: true
+    # The chance of the Shrine exploding when low on charges
+    ExplosionChance: 40
+    # Display information
+    Display: '&cCrimson &eShrine'
+    EffectDisplay: '&cHells &7Reinforcement'
+    # The material that must be placed on the chains to charge the Shrine
+    # Note: MUST be in all caps like below, and it must be a valid Material.
+    ChargeMaterial: SOUL_LANTERN
+  WarpedShrine:
+    # Should the Warped Netherite Shrine be enabled?
+    #  This shrine will replenish durability of
+    #  Netherite items.
+    Enabled: true
+    # The chance of the Shrine exploding when low on charges
+    ExplosionChance: 40
+    # Display information
+    Display: '&bWarped &eShrine'
+    EffectDisplay: '&cHells &7Mend'
+    # The material that must be placed on the chains to charge the Shrine
+    # Note: MUST be in all caps like below, and it must be a valid Material.
+    ChargeMaterial: SOUL_LANTERN
+
 
 UpgradeRecipes:
   # Define how many Netherite Ingots are required to upgrade each diamond item
+  # Note: MUST be in all caps like below, and it must be a valid Material.
   DIAMOND_SWORD: 2
   DIAMOND_AXE: 2
   DIAMOND_SHOVEL: 1

@@ -5,6 +5,8 @@ import com.github.steeldev.betternetherite.config.BetterConfig;
 import com.github.steeldev.betternetherite.config.Lang;
 import com.github.steeldev.betternetherite.listeners.blocks.AncientDebris;
 import com.github.steeldev.betternetherite.listeners.blocks.SmithingTable;
+import com.github.steeldev.betternetherite.listeners.shrines.CrimsonShrine;
+import com.github.steeldev.betternetherite.listeners.shrines.WarpedShrine;
 import com.github.steeldev.betternetherite.managers.RecipeManager;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -53,6 +55,11 @@ public class BetterNetherite extends JavaPlugin {
     public void registerBlockListeners() {
         getServer().getPluginManager().registerEvents(new SmithingTable(), this);
         getServer().getPluginManager().registerEvents(new AncientDebris(), this);
+
+        if(BetterConfig.CRIMSON_NETHERITE_SHRINE_ENABLED)
+            getServer().getPluginManager().registerEvents(new CrimsonShrine(), this);
+        if(BetterConfig.WARPED_NETHERITE_SHRINE_ENABLED)
+            getServer().getPluginManager().registerEvents(new WarpedShrine(), this);
     }
 
     public String colorize(String string) {
@@ -69,5 +76,16 @@ public class BetterNetherite extends JavaPlugin {
 
     public boolean chanceOf(int chance) {
         return rand.nextInt(100) < chance;
+    }
+
+    public String formalizedString(String string){
+        String[] itemSplit = string.toLowerCase().split("_");
+        StringBuilder finalIt = new StringBuilder();
+        for (int i = 0; i < itemSplit.length; i++) {
+            finalIt.append(itemSplit[i].substring(0, 1).toUpperCase() + itemSplit[i].substring(1));
+            if (i < itemSplit.length - 1)
+                finalIt.append(" ");
+        }
+        return finalIt.toString();
     }
 }

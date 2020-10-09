@@ -1,3 +1,19 @@
+# Valid placeholders:
+#  Plugin Related:
+#    VERSION
+#  Netherite Ingot related:
+#    ITEM, AMOUNT
+#  Crafting Related:
+#    KEY
+#  Shrine Related:
+#    SHRINE, EFFECT, CHARGESAVAILABLE, CHARGEMAT
+# NOTE: The placeholders will only get the proper value filled in if the changed message is within
+#  the context. EG: adding 'KEY' from crafting related messages in the Prefix wont be filled in.
+#  this is to prevent unneeded values being put into our messages.
+#
+# Traditional color codes supported, and Hex.
+#  EG: &cHi! <#5C040F>Hey!
+
 Prefix: '&6Better <#5C040F>Netherite &7» '
 NetheriteUpgradingDisabledMsg: '&cSmithing Table upgrading for Netherite is disabled.'
 NotEnoughIngotsMsg: '&cYou do not have enough &8Netherite Ingots&c in the second slot to upgrade your &6ITEM&c. You need &6AMOUNT&c!'
@@ -7,3 +23,10 @@ RecipeRemovedMsg: '&aRecipe for &eKEY &ahas been &cremoved!'
 RecipeAddedMsg: '&aRecipe for &eKEY &ahas been &2added!'
 EnabledMsg: '&6Better &4Netherite &6VERSION &aEnabled!'
 DisabledMsg: '&6Better &4Netherite &6VERSION &cDisabled!'
+ShrineUsedMsg: '&aYou have used a &6SHRINE &aand activated &eEFFECT&a. Your current held item is now &bReinforced&a.'
+ShrineInvalidItemMsg: '&cYour current held item cannot be used in this &6SHRINE&c.'
+ShrineItemAlreadyEffectedMsg: '&cYour current held item has already been charmed with &eEFFECT&c!'
+ShrineBuiltIncorrectlyMsg: '&cThis &6SHRINE &chas been built incorrectly, it will not function!'
+ShrineNoChargesMsg: '&cThis &6SHRINE &cis out of charges! Recharge it by replacing the &eCHARGEMAT&c on the chains.'
+ShrineChargesMsg: '&7&oThis shrine has &e&oCHARGESAVAILABLE &7&ocharges left.'
+ShrineLowOnChargeMsg: '&cThis shrine has very little charges left, be careful, it has become unstable and has a chance to explode! Recharge it by replacing the &eCHARGEMAT&c on the chains.'

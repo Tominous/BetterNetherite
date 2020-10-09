@@ -19,6 +19,14 @@ public class Lang {
     public static String ENABLED_MSG;
     public static String DISABLED_MSG;
 
+    public static String SHRINE_USED_MSG;
+    public static String SHRINE_BUILT_INCORRECT_MSG;
+    public static String SHRINE_CHARGES_MSG;
+    public static String SHRINE_CHARGES_LOW_MSG;
+    public static String SHRINE_INVALID_ITEM_MSG;
+    public static String SHRINE_ITEM_ALREADY_EFFECTED_MSG;
+    public static String SHRINE_NO_CHARGES_MSG;
+
     private final BetterNetherite plugin;
     private FileConfiguration lang;
     private File langFile;
@@ -78,5 +86,13 @@ public class Lang {
         RECIPE_ADDED_MSG = lang.getString("RecipeAddedMsg");
         ENABLED_MSG = lang.getString("EnabledMsg");
         DISABLED_MSG = lang.getString("DisabledMsg");
+
+        SHRINE_USED_MSG = lang.getString("ShrineUsedMsg");
+        SHRINE_BUILT_INCORRECT_MSG = lang.getString("ShrineBuiltIncorrectlyMsg");
+        SHRINE_CHARGES_MSG = lang.getString("ShrineChargesMsg");
+        SHRINE_CHARGES_LOW_MSG = lang.getString("ShrineLowOnChargeMsg");
+        SHRINE_INVALID_ITEM_MSG = lang.getString("ShrineInvalidItemMsg");
+        SHRINE_ITEM_ALREADY_EFFECTED_MSG = lang.getString("ShrineItemAlreadyEffectedMsg");
+        SHRINE_NO_CHARGES_MSG = lang.getString("ShrineNoChargesMsg");
     }
 }

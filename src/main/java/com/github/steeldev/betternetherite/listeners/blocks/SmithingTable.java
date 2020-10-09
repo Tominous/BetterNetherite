@@ -56,15 +56,9 @@ public class SmithingTable implements Listener {
 
             int ingotAmount = upgradeRecipes.get(String.valueOf(slot0Item.getType()));
 
-            String[] itemSplit = slot0Item.getType().toString().toLowerCase().split("_");
-            StringBuilder finalIt = new StringBuilder();
-            for (int i = 0; i < itemSplit.length; i++) {
-                finalIt.append(itemSplit[i].substring(0, 1).toUpperCase() + itemSplit[i].substring(1));
-                if (i < itemSplit.length - 1)
-                    finalIt.append(" ");
-            }
-            String notEnoughIngotsMsg = Lang.NOT_ENOUGH_INGOTS_MSG.replaceAll("AMOUNT", String.valueOf(ingotAmount)).replaceAll("ITEM", finalIt.toString());
-            String upgradeSuccessMsg = Lang.UPGRADE_SUCCESS_MSG.replaceAll("AMOUNT", String.valueOf(ingotAmount)).replaceAll("ITEM", finalIt.toString());
+            String finalIt = main.formalizedString(slot0Item.getType().toString());
+            String notEnoughIngotsMsg = Lang.NOT_ENOUGH_INGOTS_MSG.replaceAll("AMOUNT", String.valueOf(ingotAmount)).replaceAll("ITEM", finalIt);
+            String upgradeSuccessMsg = Lang.UPGRADE_SUCCESS_MSG.replaceAll("AMOUNT", String.valueOf(ingotAmount)).replaceAll("ITEM", finalIt);
 
             if (slot1Item.getAmount() < ingotAmount) {
                 e.setCancelled(true);
