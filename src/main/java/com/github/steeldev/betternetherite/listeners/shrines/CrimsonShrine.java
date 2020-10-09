@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CrimsonShrine implements Listener {
-
     BetterNetherite main = BetterNetherite.getInstance();
 
     @EventHandler
@@ -37,7 +36,7 @@ public class CrimsonShrine implements Listener {
                 e.getHand() != EquipmentSlot.HAND ||
                 e.isCancelled())
             return;
-        
+
         if (clickedBlock.getType().equals(Material.CRIMSON_STEM)) {
             Block crimsonFence = clickedBlock.getRelative(0, -1, 0);
             if (crimsonFence.getType().equals(Material.CRIMSON_FENCE)) {
@@ -126,6 +125,7 @@ public class CrimsonShrine implements Listener {
                                                 chargeMat3,
                                                 chargeMat7,
                                                 chargeMat8));
+
                                         correct = true;
                                         int chargesLeft = 0;
                                         for (Block charge : charges) {
@@ -205,9 +205,8 @@ public class CrimsonShrine implements Listener {
                     }
                 }
             }
-            if (!correct) {
+            if (!correct)
                 p.sendMessage(main.colorize(Lang.PREFIX + Lang.SHRINE_BUILT_INCORRECT_MSG.replaceAll("SHRINE", BetterConfig.CRIMSON_NETHERITE_SHRINE_DISPLAY)));
-            }
         }
     }
 }
