@@ -5,6 +5,7 @@ import com.github.steeldev.betternetherite.config.BetterConfig;
 import com.github.steeldev.betternetherite.config.Lang;
 import com.github.steeldev.betternetherite.listeners.blocks.AncientDebris;
 import com.github.steeldev.betternetherite.listeners.blocks.SmithingTable;
+import com.github.steeldev.betternetherite.listeners.items.ReinforcedItem;
 import com.github.steeldev.betternetherite.listeners.shrines.CrimsonShrine;
 import com.github.steeldev.betternetherite.listeners.shrines.WarpedShrine;
 import com.github.steeldev.betternetherite.managers.RecipeManager;
@@ -33,6 +34,7 @@ public class BetterNetherite extends JavaPlugin {
         loadCustomConfigs();
         registerCommands();
         registerBlockListeners();
+        registerItemListeners();
         RecipeManager.RegisterRecipes();
 
         getLogger().info(colorize(Lang.ENABLED_MSG.replace("VERSION", getDescription().getVersion())));
@@ -60,6 +62,11 @@ public class BetterNetherite extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new CrimsonShrine(), this);
         if(BetterConfig.WARPED_NETHERITE_SHRINE_ENABLED)
             getServer().getPluginManager().registerEvents(new WarpedShrine(), this);
+    }
+
+    public void registerItemListeners(){
+        if(BetterConfig.CRIMSON_NETHERITE_SHRINE_ENABLED)
+            getServer().getPluginManager().registerEvents(new ReinforcedItem(), this);
     }
 
     public String colorize(String string) {

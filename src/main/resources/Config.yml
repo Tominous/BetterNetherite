@@ -52,6 +52,10 @@ NetheriteShrines:
     # The material that must be placed on the chains to charge the Shrine
     # Note: MUST be in all caps like below, and it must be a valid Material.
     ChargeMaterial: SOUL_LANTERN
+    ReinforcedItems:
+      DurabilityLossChance: 20
+      ExtraDamageChance: 60
+      DamageIncrease: 3
   WarpedShrine:
     # Should the Warped Netherite Shrine be enabled?
     #  This shrine will replenish durability of

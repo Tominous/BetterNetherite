@@ -52,6 +52,11 @@ public class BetterConfig {
     public static String WARPED_NETHERITE_SHRINE_EFFECT_DISPLAY;
     public static Material WARPED_NETHERITE_SHRINE_CHARGE_MAT;
 
+    //Reinforced items
+    public static int REINFORCED_ITEM_DURABILITY_LOSS_CHANCE;
+    public static int REINFORCED_ITEM_EXTRA_DMG_CHANCE;
+    public static int REINFORCED_ITEM_DAMAGE_INCREASE;
+
     private final BetterNetherite plugin;
     private FileConfiguration config;
     private File configFile;
@@ -129,6 +134,10 @@ public class BetterConfig {
         WARPED_NETHERITE_SHRINE_DISPLAY = config.getString("NetheriteShrines.WarpedShrine.Display");
         WARPED_NETHERITE_SHRINE_EFFECT_DISPLAY = config.getString("NetheriteShrines.WarpedShrine.EffectDisplay");
         WARPED_NETHERITE_SHRINE_CHARGE_MAT = Material.valueOf(config.getString("NetheriteShrines.WarpedShrine.ChargeMaterial"));
+
+        REINFORCED_ITEM_DURABILITY_LOSS_CHANCE = config.getInt("NetheriteShrines.CrimsonShrine.ReinforcedItems.DurabilityLossChance");
+        REINFORCED_ITEM_EXTRA_DMG_CHANCE = config.getInt("NetheriteShrines.CrimsonShrine.ReinforcedItems.ExtraDamageChance");
+        REINFORCED_ITEM_DAMAGE_INCREASE = config.getInt("NetheriteShrines.CrimsonShrine.ReinforcedItems.DamageIncrease");
 
         USABLE_SHRINE_ITEMS = new HashMap<>();
         List<String> shrineItemSection = config.getStringList("NetheriteShrines.UsableItems");

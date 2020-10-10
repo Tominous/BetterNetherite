@@ -25,6 +25,7 @@ public class Lang {
     public static String SHRINE_CHARGES_LOW_MSG;
     public static String SHRINE_INVALID_ITEM_MSG;
     public static String SHRINE_ITEM_ALREADY_EFFECTED_MSG;
+    public static String SHRINE_ITEM_FULL_DUR_MSG;
     public static String SHRINE_NO_CHARGES_MSG;
 
     private final BetterNetherite plugin;
@@ -93,6 +94,7 @@ public class Lang {
         SHRINE_CHARGES_LOW_MSG = lang.getString("ShrineLowOnChargeMsg");
         SHRINE_INVALID_ITEM_MSG = lang.getString("ShrineInvalidItemMsg");
         SHRINE_ITEM_ALREADY_EFFECTED_MSG = lang.getString("ShrineItemAlreadyEffectedMsg");
+        SHRINE_ITEM_FULL_DUR_MSG = lang.getString("ShrineItemDurabilityFull");
         SHRINE_NO_CHARGES_MSG = lang.getString("ShrineNoChargesMsg");
     }
 }

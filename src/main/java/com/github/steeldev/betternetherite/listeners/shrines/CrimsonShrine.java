@@ -192,7 +192,7 @@ public class CrimsonShrine implements Listener {
                                                 }
                                             }
                                             p.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, clickedBlock.getLocation(), 2);
-                                            p.sendMessage(main.colorize(Lang.PREFIX + Lang.SHRINE_USED_MSG.replaceAll("SHRINE", BetterConfig.CRIMSON_NETHERITE_SHRINE_DISPLAY).replaceAll("EFFECT", BetterConfig.CRIMSON_NETHERITE_SHRINE_EFFECT_DISPLAY)));
+                                            p.sendMessage(main.colorize(Lang.PREFIX + Lang.SHRINE_USED_MSG.replaceAll("SHRINE", BetterConfig.CRIMSON_NETHERITE_SHRINE_DISPLAY).replaceAll("EFFECT", BetterConfig.CRIMSON_NETHERITE_SHRINE_EFFECT_DISPLAY).replaceAll("EFFRES", "Reinforced")));
                                         } else {
                                             String chargeMat = main.formalizedString(BetterConfig.CRIMSON_NETHERITE_SHRINE_CHARGE_MAT.toString());
                                             p.getWorld().playSound(clickedBlock.getLocation(), Sound.BLOCK_BEACON_DEACTIVATE, 1.6f, 1.6f);
