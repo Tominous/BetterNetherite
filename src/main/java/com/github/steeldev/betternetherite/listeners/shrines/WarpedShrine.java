@@ -150,10 +150,19 @@ public class WarpedShrine implements Listener {
                                             p.getInventory().setItemInMainHand(item);
 
                                             chargesLeft--;
-                                            charges.get(chargesLeft).setType(Material.AIR);
+
+                                            Block chargeChosen = null;
+
+                                            for (Block charge : charges) {
+                                                if (!charge.getType().equals(Material.AIR)) {
+                                                    chargeChosen = charge;
+                                                }
+                                            }
+                                            chargeChosen.setType(Material.AIR);
+
                                             p.getWorld().strikeLightning(clickedBlock.getLocation());
-                                            p.getWorld().spawnParticle(Particle.FLAME, charges.get(chargesLeft).getLocation(), 5);
-                                            p.getWorld().playSound(charges.get(chargesLeft).getLocation(), Sound.BLOCK_REDSTONE_TORCH_BURNOUT, 1.5f, 1.5f);
+                                            p.getWorld().spawnParticle(Particle.FLAME, chargeChosen.getLocation(), 5);
+                                            p.getWorld().playSound(chargeChosen.getLocation(), Sound.BLOCK_REDSTONE_TORCH_BURNOUT, 1.5f, 1.5f);
                                             p.getWorld().playSound(clickedBlock.getLocation(), Sound.BLOCK_ANVIL_USE, 1.6f, 1.6f);
                                             if (chargesLeft < 3) {
                                                 String chargeMat = main.formalizedString(BetterConfig.WARPED_NETHERITE_SHRINE_CHARGE_MAT.toString());
