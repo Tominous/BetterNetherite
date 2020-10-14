@@ -8,7 +8,7 @@
 #  EG: &cHi! <#5C040F>Hey!
 
 # Enable debug messages?
-Debug: false
+Debug: true
 
 # true - Disable the dumb vanilla way of crafting netherite items
 # false - Enable the dumb vanmilla way of crafting netherite items
