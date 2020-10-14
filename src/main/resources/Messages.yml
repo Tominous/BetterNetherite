@@ -1,8 +1,8 @@
 # Valid placeholders:
 #  Plugin Related:
 #    VERSION
-#  Netherite Ingot related:
-#    ITEM, AMOUNT
+#  Smithing/Upgrade related:
+#    ITEM, AMOUNT, MATNEEDED, UPGRADEDTO
 #  Crafting Related:
 #    KEY
 #  Shrine Related:
@@ -16,9 +16,9 @@
 
 Prefix: '&6Better <#5C040F>Netherite &7» '
 NetheriteUpgradingDisabledMsg: '&cSmithing Table upgrading for Netherite is disabled.'
-NotEnoughIngotsMsg: '&cYou do not have enough &8Netherite Ingots&c in the second slot to upgrade your &6ITEM&c. You need &6AMOUNT&c!'
-UpgradeSuccessMsg: '&aYou have successfully upgraded your &6ITEM &ato &8Netherite&a for &6AMOUNT &8Netherite Ingots&a!'
-ReloadMsg: '&aSuccessfully reloaded configurations! &7&oPlease note, most features require a server restart to fully apply!'
+NotEnoughMatsToUpgradeMsg: '&cYou do not have enough &eMATNEEDED&c in the second slot to upgrade your &6ITEM&c. You need &6AMOUNT&c!'
+UpgradeSuccessMsg: '&aYou have successfully upgraded your &6ITEM &ato &eUPGRADEDTO&a for &6AMOUNT &eMATNEEDED&a!'
+ReloadMsg: '&aSuccessfully reloaded configurations! &c&oPlease note, most features require a server restart to fully apply!'
 RecipeRemovedMsg: '&aRecipe for &eKEY &ahas been &cremoved!'
 RecipeAddedMsg: '&aRecipe for &eKEY &ahas been &2added!'
 EnabledMsg: '&6Better &4Netherite &6VERSION &aEnabled!'

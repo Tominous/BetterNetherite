@@ -11,14 +11,13 @@ import java.io.InputStreamReader;
 public class Lang {
     public static String PREFIX;
     public static String NETHERITE_UPGRADING_DISABLE_MSG;
-    public static String NOT_ENOUGH_INGOTS_MSG;
+    public static String NOT_ENOUGH_MATS_UPGRADE_MSG;
     public static String UPGRADE_SUCCESS_MSG;
     public static String RELOAD_MSG;
     public static String RECIPE_REMOVED_MSG;
     public static String RECIPE_ADDED_MSG;
     public static String ENABLED_MSG;
     public static String DISABLED_MSG;
-
     public static String SHRINE_USED_MSG;
     public static String SHRINE_BUILT_INCORRECT_MSG;
     public static String SHRINE_CHARGES_MSG;
@@ -80,7 +79,7 @@ public class Lang {
     private void loadLang() {
         PREFIX = lang.getString("Prefix");
         NETHERITE_UPGRADING_DISABLE_MSG = lang.getString("NetheriteUpgradingDisabledMsg");
-        NOT_ENOUGH_INGOTS_MSG = lang.getString("NotEnoughIngotsMsg");
+        NOT_ENOUGH_MATS_UPGRADE_MSG = lang.getString("NotEnoughMatsToUpgradeMsg");
         UPGRADE_SUCCESS_MSG = lang.getString("UpgradeSuccessMsg");
         RELOAD_MSG = lang.getString("ReloadMsg");
         RECIPE_REMOVED_MSG = lang.getString("RecipeRemovedMsg");

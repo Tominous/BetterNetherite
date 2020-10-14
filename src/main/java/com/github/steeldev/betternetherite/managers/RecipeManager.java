@@ -19,8 +19,139 @@ public class RecipeManager {
         if (BetterConfig.ENABLE_NETHERITE_CRAFTING &&
                 !BetterConfig.IMPROVED_UPGRADING)
             registerNetheriteItems();
+        if(BetterConfig.IMPROVED_UPGRADING &&
+                !BetterConfig.ENABLE_NETHERITE_CRAFTING)
+            registerImprovedUpgradingSmithingTableItems();
         if (BetterConfig.ANCIENT_DEBRIS_BETTER_SMELTING_ENABLED)
             registerBetterNetheriteScrapSmelting();
+    }
+
+    static void registerImprovedUpgradingSmithingTableItems(){
+        // Wood to Stone
+        addSmithingRecipe("wood_to_stone_sword_smithing",
+                new ItemStack(Material.STONE_SWORD),
+                Material.WOODEN_SWORD,
+                new ItemStack(Material.COBBLESTONE));
+        addSmithingRecipe("wood_to_stone_axe_smithing",
+                new ItemStack(Material.STONE_AXE),
+                Material.WOODEN_AXE,
+                new ItemStack(Material.COBBLESTONE));
+        addSmithingRecipe("wood_to_stone_shovel_smithing",
+                new ItemStack(Material.STONE_SHOVEL),
+                Material.WOODEN_SHOVEL,
+                new ItemStack(Material.COBBLESTONE));
+        addSmithingRecipe("wood_to_stone_hoe_smithing",
+                new ItemStack(Material.STONE_HOE),
+                Material.WOODEN_HOE,
+                new ItemStack(Material.COBBLESTONE));
+        addSmithingRecipe("wood_to_stone_pickaxe_smithing",
+                new ItemStack(Material.STONE_PICKAXE),
+                Material.WOODEN_PICKAXE,
+                new ItemStack(Material.COBBLESTONE));
+        
+        // Stone to Iron
+        addSmithingRecipe("stone_to_iron_sword_smithing",
+                new ItemStack(Material.IRON_SWORD),
+                Material.STONE_SWORD,
+                new ItemStack(Material.IRON_INGOT));
+        addSmithingRecipe("stone_to_iron_axe_smithing",
+                new ItemStack(Material.IRON_AXE),
+                Material.STONE_AXE,
+                new ItemStack(Material.IRON_INGOT));
+        addSmithingRecipe("stone_to_iron_shovel_smithing",
+                new ItemStack(Material.IRON_SHOVEL),
+                Material.STONE_SHOVEL,
+                new ItemStack(Material.IRON_INGOT));
+        addSmithingRecipe("stone_to_iron_hoe_smithing",
+                new ItemStack(Material.IRON_HOE),
+                Material.STONE_HOE,
+                new ItemStack(Material.IRON_INGOT));
+        addSmithingRecipe("stone_to_iron_pickaxe_smithing",
+                new ItemStack(Material.IRON_PICKAXE),
+                Material.STONE_PICKAXE,
+                new ItemStack(Material.IRON_INGOT));
+        
+        // Iron to Gold
+        addSmithingRecipe("iron_to_gold_sword_smithing",
+                new ItemStack(Material.GOLDEN_SWORD),
+                Material.IRON_SWORD,
+                new ItemStack(Material.GOLD_INGOT));
+        addSmithingRecipe("iron_to_gold_axe_smithing",
+                new ItemStack(Material.GOLDEN_AXE),
+                Material.IRON_AXE,
+                new ItemStack(Material.GOLD_INGOT));
+        addSmithingRecipe("iron_to_gold_shovel_smithing",
+                new ItemStack(Material.GOLDEN_SHOVEL),
+                Material.IRON_SHOVEL,
+                new ItemStack(Material.GOLD_INGOT));
+        addSmithingRecipe("iron_to_gold_hoe_smithing",
+                new ItemStack(Material.GOLDEN_HOE),
+                Material.IRON_HOE,
+                new ItemStack(Material.GOLD_INGOT));
+        addSmithingRecipe("iron_to_gold_pickaxe_smithing",
+                new ItemStack(Material.GOLDEN_PICKAXE),
+                Material.IRON_PICKAXE,
+                new ItemStack(Material.GOLD_INGOT));
+        addSmithingRecipe("iron_to_gold_helmet_smithing",
+                new ItemStack(Material.GOLDEN_HELMET),
+                Material.IRON_HELMET,
+                new ItemStack(Material.GOLD_INGOT));
+        addSmithingRecipe("iron_to_gold_chestplate_smithing",
+                new ItemStack(Material.GOLDEN_CHESTPLATE),
+                Material.IRON_CHESTPLATE,
+                new ItemStack(Material.GOLD_INGOT));
+        addSmithingRecipe("iron_to_gold_leggings_smithing",
+                new ItemStack(Material.GOLDEN_LEGGINGS),
+                Material.IRON_LEGGINGS,
+                new ItemStack(Material.GOLD_INGOT));
+        addSmithingRecipe("iron_to_gold_boots_smithing",
+                new ItemStack(Material.GOLDEN_BOOTS),
+                Material.IRON_BOOTS,
+                new ItemStack(Material.GOLD_INGOT));
+
+        // Iron to Diamond
+        addSmithingRecipe("iron_to_diamond_sword_smithing",
+                new ItemStack(Material.DIAMOND_SWORD),
+                Material.IRON_SWORD,
+                new ItemStack(Material.DIAMOND));
+        addSmithingRecipe("iron_to_diamond_axe_smithing",
+                new ItemStack(Material.DIAMOND_AXE),
+                Material.IRON_AXE,
+                new ItemStack(Material.DIAMOND));
+        addSmithingRecipe("iron_to_diamond_shovel_smithing",
+                new ItemStack(Material.DIAMOND_SHOVEL),
+                Material.IRON_SHOVEL,
+                new ItemStack(Material.DIAMOND));
+        addSmithingRecipe("iron_to_diamond_hoe_smithing",
+                new ItemStack(Material.DIAMOND_HOE),
+                Material.IRON_HOE,
+                new ItemStack(Material.DIAMOND));
+        addSmithingRecipe("iron_to_diamond_pickaxe_smithing",
+                new ItemStack(Material.DIAMOND_PICKAXE),
+                Material.IRON_PICKAXE,
+                new ItemStack(Material.DIAMOND));
+        addSmithingRecipe("iron_to_diamond_helmet_smithing",
+                new ItemStack(Material.DIAMOND_HELMET),
+                Material.IRON_HELMET,
+                new ItemStack(Material.DIAMOND));
+        addSmithingRecipe("iron_to_diamond_chestplate_smithing",
+                new ItemStack(Material.DIAMOND_CHESTPLATE),
+                Material.IRON_CHESTPLATE,
+                new ItemStack(Material.DIAMOND));
+        addSmithingRecipe("iron_to_diamond_leggings_smithing",
+                new ItemStack(Material.DIAMOND_LEGGINGS),
+                Material.IRON_LEGGINGS,
+                new ItemStack(Material.DIAMOND));
+        addSmithingRecipe("iron_to_diamond_boots_smithing",
+                new ItemStack(Material.DIAMOND_BOOTS),
+                Material.IRON_BOOTS,
+                new ItemStack(Material.DIAMOND));
+    }
+
+    static void addSmithingRecipe(String key, ItemStack result, Material baseMat, ItemStack itemNeeded){
+        NamespacedKey smithingRecKey = new NamespacedKey(main, key);
+        SmithingRecipe smithingRec = new SmithingRecipe(smithingRecKey,result,new RecipeChoice.MaterialChoice(baseMat), new RecipeChoice.ExactChoice(itemNeeded));
+        addRecipe(smithingRec);
     }
 
     static void registerNetheriteItems() {

@@ -1,6 +1,7 @@
 package com.github.steeldev.betternetherite.config;
 
 import com.github.steeldev.betternetherite.BetterNetherite;
+import com.github.steeldev.betternetherite.util.WhyNoWorkException;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -14,14 +15,16 @@ import java.util.List;
 import java.util.Map;
 
 public class BetterConfig {
-    BetterNetherite main = BetterNetherite.getInstance();
-
     // Config stuff
     public static boolean DEBUG;
     public static boolean ENABLE_NETHERITE_CRAFTING;
     public static boolean IMPROVED_UPGRADING;
     // Upgrade Recipes
-    public static Map<String, Integer> UPGRADE_RECIPES;
+    public static Map<String, Integer> UPGRADE_RECIPES_WOOD_TO_STONE;
+    public static Map<String, Integer> UPGRADE_RECIPES_STONE_TO_IRON;
+    public static Map<String, Integer> UPGRADE_RECIPES_IRON_TO_DIAMOND;
+    public static Map<String, Integer> UPGRADE_RECIPES_IRON_TO_GOLD;
+    public static Map<String, Integer> UPGRADE_RECIPES_DIAMOND_TO_NETHERITE;
     // Ancient Debris Better Smelting
     public static boolean ANCIENT_DEBRIS_BETTER_SMELTING_ENABLED;
     public static int ANCIENT_DEBRIS_BETTER_SMELTING_AMOUNT;
@@ -41,7 +44,7 @@ public class BetterConfig {
 
     public static boolean CRIMSON_NETHERITE_SHRINE_ENABLED;
     public static boolean WARPED_NETHERITE_SHRINE_ENABLED;
-    
+
     public static int CRIMSON_NETHERITE_SHRINE_EXPLODE_CHANCE;
     public static String CRIMSON_NETHERITE_SHRINE_DISPLAY;
     public static String CRIMSON_NETHERITE_SHRINE_EFFECT_DISPLAY;
@@ -109,7 +112,10 @@ public class BetterConfig {
     private void loadConfigs() {
         DEBUG = config.getBoolean("Debug");
         ENABLE_NETHERITE_CRAFTING = config.getBoolean("NetheriteCrafting");
-        IMPROVED_UPGRADING = config.getBoolean("ImprovedUpgrading");
+        IMPROVED_UPGRADING = config.getBoolean("ImprovedUpgrading.Enabled");
+        if(ENABLE_NETHERITE_CRAFTING && IMPROVED_UPGRADING){
+            throw new WhyNoWorkException("Netherite Crafting and Improved Upgrading cannot both be true.");
+        }
         ANCIENT_DEBRIS_BETTER_SMELTING_ENABLED = config.getBoolean("AncientDebris.BetterSmelting.Enabled");
         ANCIENT_DEBRIS_BETTER_SMELTING_AMOUNT = config.getInt("AncientDebris.BetterSmelting.Amount");
         ANCIENT_DEBRIS_BETTER_SMELTING_BLAST_FURNACE_EXP = config.getInt("AncientDebris.BetterSmelting.BlastFurnace.EXP");
@@ -146,11 +152,39 @@ public class BetterConfig {
             USABLE_SHRINE_ITEMS.put(key, mat);
         }
 
-        UPGRADE_RECIPES = new HashMap<>();
-        ConfigurationSection section = config.getConfigurationSection("UpgradeRecipes");
-        if (section == null) return;
-        for (String key : section.getKeys(false)) {
-            UPGRADE_RECIPES.put(key, section.getInt(key));
+        UPGRADE_RECIPES_WOOD_TO_STONE = new HashMap<>();
+        ConfigurationSection woodSection = config.getConfigurationSection("ImprovedUpgrading.UpgradeRecipes.WoodToStone");
+        if (woodSection == null) return;
+        for (String key : woodSection.getKeys(false)) {
+            UPGRADE_RECIPES_WOOD_TO_STONE.put(key, woodSection.getInt(key));
+        }
+
+        UPGRADE_RECIPES_STONE_TO_IRON = new HashMap<>();
+        ConfigurationSection stoneSection = config.getConfigurationSection("ImprovedUpgrading.UpgradeRecipes.StoneToIron");
+        if (stoneSection == null) return;
+        for (String key : stoneSection.getKeys(false)) {
+            UPGRADE_RECIPES_STONE_TO_IRON.put(key, stoneSection.getInt(key));
+        }
+
+        UPGRADE_RECIPES_IRON_TO_DIAMOND = new HashMap<>();
+        ConfigurationSection ironSection = config.getConfigurationSection("ImprovedUpgrading.UpgradeRecipes.IronToDiamond");
+        if (ironSection == null) return;
+        for (String key : ironSection.getKeys(false)) {
+            UPGRADE_RECIPES_IRON_TO_DIAMOND.put(key, ironSection.getInt(key));
+        }
+
+        UPGRADE_RECIPES_IRON_TO_GOLD = new HashMap<>();
+        ConfigurationSection goldSection = config.getConfigurationSection("ImprovedUpgrading.UpgradeRecipes.IronToGold");
+        if (goldSection == null) return;
+        for (String key : goldSection.getKeys(false)) {
+            UPGRADE_RECIPES_IRON_TO_GOLD.put(key, goldSection.getInt(key));
+        }
+
+        UPGRADE_RECIPES_DIAMOND_TO_NETHERITE = new HashMap<>();
+        ConfigurationSection diamondSection = config.getConfigurationSection("ImprovedUpgrading.UpgradeRecipes.DiamondToNetherite");
+        if (diamondSection == null) return;
+        for (String key : diamondSection.getKeys(false)) {
+            UPGRADE_RECIPES_DIAMOND_TO_NETHERITE.put(key, diamondSection.getInt(key));
         }
     }
 }

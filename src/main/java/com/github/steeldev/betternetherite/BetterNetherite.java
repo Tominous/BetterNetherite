@@ -46,8 +46,8 @@ public class BetterNetherite extends JavaPlugin {
     }
 
     public void loadCustomConfigs() {
-        this.config = new BetterConfig(this);
         this.lang = new Lang(this);
+        this.config = new BetterConfig(this);
     }
 
     public void registerCommands() {
